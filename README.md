@@ -55,7 +55,7 @@ in this case the robot must be launched with the velocity interface
 ```
 $ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="velocity" robot_controller:="velocity_controller"
 ```
-
+**P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)**
 **To use the effort commands** 
 ```
 $ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=effort
@@ -64,5 +64,6 @@ in this case the robot must be launched with the effort interface
 ```
 $ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="effort" robot_controller:="effort_controller"
 ```
-Note that the ros2_kdl_node is set to do an OPERATIONAL SPACE INVERSE DYNAMICS CONTROL, if you like to do a JOINT SPACE INVERSE DYNAMICS CONTROL you must change choice=1
+**P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)**
+**Note that the ros2_kdl_node is set to do an OPERATIONAL SPACE INVERSE DYNAMICS CONTROL, if you like to do a JOINT SPACE INVERSE DYNAMICS CONTROL you must change choice=1**
 
