@@ -51,7 +51,8 @@ Note that by default the node publishes joint position commands.
 ```
 $ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=velocity
 ```
-**P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)** 
+**P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)**   
+
 in this case the robot must be launched with the velocity interface
 ```
 $ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="velocity" robot_controller:="velocity_controller"
@@ -61,7 +62,8 @@ $ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="velocity" robot_co
 ```
 $ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=effort
 ```
-**P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)** 
+**P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)**   
+
 in this case the robot must be launched with the effort interface
 ```
 $ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="effort" robot_controller:="effort_controller"
