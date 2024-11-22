@@ -31,7 +31,7 @@ $ ros2 launch iiwa_bringup iiwa.launch.py
 **Run the node specifing what trajectory and how it must be computed (0, 1, 2 ,3):**  
 
 ⚠️ Eventually insert by terminal the acceleration duration of the trapezoidal velocity profile and/or the radius of the circular trajectory 
-(recomended values are acc_duration = 0.5 and traj_radius = 0.2) ⚠️ 
+(recommended values are acc_duration = 0.5 and traj_radius = 0.2) ⚠️ 
   
 **a) Linear trajectory using trapezoidal velocity profile (0):**  
 ```
