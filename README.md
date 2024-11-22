@@ -20,13 +20,13 @@ Source the setup files
 $ source install/setup.bash
 ```
 ## :white_check_mark: Usage 🤖
-1. First of all, launch Rviz with Gazebo with the launch file
+## 1. First of all, launch Rviz with Gazebo with the launch file
 
 Note that by default it's used the **Position Controller** ⚙️
 ```
 $ ros2 launch iiwa_bringup iiwa.launch.py
 ```
-2. Send position commands to the robot
+## 2. Send position commands to the robot
     
 **Run the node specifing what trajectory and how it must be computed (0, 1, 2 ,3):**  
 
@@ -50,30 +50,30 @@ $ ros2 run ros2_kdl_package ros2_kdl_node 2
 $ ros2 run ros2_kdl_package ros2_kdl_node 3
 ```
 
-### To use the Velocity Controller ⚙️
-1. Launch Gazebo with the velocity controller
+## To use the Velocity Controller ⚙️
+## 1. Launch Gazebo with the velocity controller
 ```
 $ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="velocity" robot_controller:="velocity_controller"
 ```
-2. Send velocity commands to the robot
+## 2. Send velocity commands to the robot
 ```
 $ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=velocity
 ```
 ***P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)***  
 
-### To use the Effort Controller ⚙️
-1. Launch Gazebo with the effort controller
+## To use the Effort Controller ⚙️
+## 1. Launch Gazebo with the effort controller
  ```  
 $ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="effort" robot_controller:="effort_controller" 
 ```
-2. Send effort commands to the robot
+## 2. Send effort commands to the robot
 
 ```
 $ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=effort
 ```
 ***P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)***   
 
-3. To view torques sent to the robot run 
+## 3. To view torques sent to the robot run 
 ```
 $ ros2 run rqt_plot rqt_plot
 ```
