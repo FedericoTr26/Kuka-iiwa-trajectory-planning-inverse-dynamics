@@ -71,7 +71,7 @@ $ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="effort" robot_cont
 ```
 $ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=effort
 ```
-**P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)**   
+***P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)***   
 
 3. To view torques sent to the robot run 
 ```
