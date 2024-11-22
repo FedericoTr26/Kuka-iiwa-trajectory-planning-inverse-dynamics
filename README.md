@@ -75,9 +75,9 @@ $ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=effort
 
 3. To view torques sent to the robot run 
 ```
-$ rqt
+$ ros2 run rqt_plot rqt_plot
 ```
 and go in `Plugins->Visualization->Plot` and add `/effort_controller/commands/data[0]`, then `/effort_controller/commands/data[1]` up to `/effort_controller/commands/data[6]`
  
-**Note that the ros2_kdl_node is set to do an OPERATIONAL SPACE INVERSE DYNAMICS CONTROL, if you like to do a JOINT SPACE INVERSE DYNAMICS CONTROL you must change choice=1 inside the code.**
+**Note that the ros2_kdl_node is set to do an OPERATIONAL SPACE INVERSE DYNAMICS CONTROL, if you like to do a JOINT SPACE INVERSE DYNAMICS CONTROL you must change choice=1 inside the code on line 31.**
 
