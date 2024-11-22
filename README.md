@@ -22,7 +22,7 @@ $ source install/setup.bash
 ## :white_check_mark: Usage 🤖
 1. First of all, launch Rviz with Gazebo with the launch file
 
-Note that by default it's used the Position Controller ⚙️
+Note that by default it's used the **Position Controller** ⚙️
 ```
 $ ros2 launch iiwa_bringup iiwa.launch.py
 ```
