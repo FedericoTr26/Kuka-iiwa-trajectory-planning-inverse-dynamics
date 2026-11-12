@@ -1,20 +1,20 @@
 # KUKA iiwa Trajectory Planning and Inverse Dynamics
 
-A ROS 2 and Gazebo Sim study of end-effector trajectories for a seven-joint KUKA iiwa. We compared joint-space and operational-space inverse dynamics on four trajectory variants.
+A ROS 2 and Gazebo Sim study of end-effector trajectories for a seven-joint KUKA iiwa. The study compares joint-space and operational-space inverse dynamics on four trajectory variants.
 
 [Technical report](Trenti_hw2.pdf)
 
-## What we built
+## Implementation
 
-- Extended the KDL planner with straight-line and circular paths, each with trapezoidal velocity and cubic time profiles.
-- Used joint-space and operational-space inverse dynamics to generate joint torque commands.
-- Recorded both controllers across all four trajectories and plotted the seven commanded torques in MATLAB.
+- The KDL planner was extended with straight-line and circular paths, each with trapezoidal velocity and cubic time profiles.
+- Joint torque generation was implemented using joint-space and operational-space inverse dynamics.
+- The evaluation recorded both controllers across all four trajectories and used MATLAB to plot the seven commanded torques.
 
 ## Run the demos
 
 Use ROS 2 Humble, Gazebo Sim, `ros2_control`, Orocos KDL, and Eigen. See the [bundled iiwa stack documentation](ros2_iiwa/README.md) for its setup and dependencies.
 
-From the `src` directory of your ROS 2 workspace, clone the repository.
+Clone the repository from the `src` directory of the ROS 2 workspace.
 
 ```bash
 git clone https://github.com/FedericoTr26/RL_Homework-2.git
