@@ -2,7 +2,7 @@
 
 A ROS 2 and Gazebo Sim study of end-effector trajectories for a seven-joint KUKA iiwa. The study compares joint-space and operational-space inverse dynamics on four trajectory variants.
 
-[Technical report](Trenti_hw2.pdf)
+[Technical report](kuka-iiwa-trajectory-planning-inverse-dynamics.pdf)
 
 ## Implementation
 
