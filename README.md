@@ -1,83 +1,101 @@
-# Homework 2
+# KUKA iiwa Trajectory Planning and Inverse Dynamics
 
-## :hammer: Build
+A ROS 2 and Gazebo Sim study of end-effector trajectories for a seven-joint KUKA iiwa. We compared joint-space and operational-space inverse dynamics on four trajectory variants.
 
-Clone this package in the `src` folder of your ROS 2 workspace. Check for missing dependencies
-```
-$ git clone https://github.com/FedericoTr26/RL_Homework-2.git
-```
-```
-$ rosdep install -i --from-path src --rosdistro humble -y
-```
-Build your new package
+[Technical report](Trenti_hw2.pdf)
 
-```
-$ colcon build 
-```
-Source the setup files
+## What we built
 
-```
-$ source install/setup.bash
-```
-## :white_check_mark: Usage 🤖
-### 1. Run Rviz and Gazebo with the launch file
+- Extended the KDL planner with straight-line and circular paths, each with trapezoidal velocity and cubic time profiles.
+- Used joint-space and operational-space inverse dynamics to generate joint torque commands.
+- Recorded both controllers across all four trajectories and plotted the seven commanded torques in MATLAB.
 
-Note that by default it's used the **Position Controller** ⚙️
-```
-$ ros2 launch iiwa_bringup iiwa.launch.py
-```
-### 2. Send position commands to the robot
-    
-***Run the node specifying what trajectory and how it must be computed (0, 1, 2 ,3):***  
+## Run the demos
 
-⚠️ Eventually insert by terminal the acceleration duration of the trapezoidal velocity profile and/or the radius of the circular trajectory 
-(recommended values are acc_duration = 0.5 and traj_radius = 0.2) ⚠️ 
-  
-**a) Linear trajectory using trapezoidal velocity profile (0):**  
-```
-$ ros2 run ros2_kdl_package ros2_kdl_node
-```
-**b) Linear trajectory using cubic polynomial (1):** 
-```
-$ ros2 run ros2_kdl_package ros2_kdl_node 1
-```
-**c) Circular trajectory using trapezoidal velocity profile (2):** 
-```
-$ ros2 run ros2_kdl_package ros2_kdl_node 2
-```
-**d) Circular trajectory using cubic polynomial (3):**  
-```
-$ ros2 run ros2_kdl_package ros2_kdl_node 3
+Use ROS 2 Humble, Gazebo Sim, `ros2_control`, Orocos KDL, and Eigen. See the [bundled iiwa stack documentation](ros2_iiwa/README.md) for its setup and dependencies.
+
+From the `src` directory of your ROS 2 workspace, clone the repository.
+
+```bash
+git clone https://github.com/FedericoTr26/RL_Homework-2.git
 ```
 
-## To use the Velocity Controller ⚙️
-### 1. Launch Gazebo with the velocity controller
-```
-$ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="velocity" robot_controller:="velocity_controller"
-```
-### 2. Send velocity commands to the robot
-```
-$ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=velocity
-```
-***P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)***  
+Return to the workspace root to build and source the workspace.
 
-## To use the Effort Controller ⚙️
-### 1. Launch Gazebo with the effort controller
- ```  
-$ ros2 launch iiwa_bringup iiwa.launch.py command_interface:="effort" robot_controller:="effort_controller" 
+```bash
+rosdep install -i --from-path src --rosdistro humble -y
+colcon build
+source install/setup.bash
 ```
-### 2. Send effort commands to the robot
 
-```
-$ ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=effort
-```
-***P.S.: also in this case it's possible to specify what trajectory use (0, 1, 2, 3)***   
+Source `install/setup.bash` from the workspace root in each new terminal.
 
-### 3. To view torques sent to the robot run 
-```
-$ ros2 run rqt_plot rqt_plot
-```
-and add, as topic, `/effort_controller/commands/data[0]`, then `/effort_controller/commands/data[1]` up to `/effort_controller/commands/data[6]`
- 
-**Note that the ros2_kdl_node is set to do an OPERATIONAL SPACE INVERSE DYNAMICS CONTROL, if you like to do a JOINT SPACE INVERSE DYNAMICS CONTROL you must change "choice=1" inside the code on line 31.**
+### Position control
 
+Launch the robot with the default position controller in the first terminal.
+
+```bash
+ros2 launch iiwa_bringup iiwa.launch.py
+```
+
+Choose one trajectory command in a second terminal, using the ID and input descriptions in the table below.
+
+```bash
+ros2 run ros2_kdl_package ros2_kdl_node
+ros2 run ros2_kdl_package ros2_kdl_node 1
+ros2 run ros2_kdl_package ros2_kdl_node 2
+ros2 run ros2_kdl_package ros2_kdl_node 3
+```
+
+### Velocity control
+
+Launch Gazebo with the velocity controller in the first terminal and start the node in a second terminal.
+
+```bash
+ros2 launch iiwa_bringup iiwa.launch.py command_interface:="velocity" robot_controller:="velocity_controller"
+```
+
+```bash
+ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=velocity
+```
+
+### Effort control
+
+Launch Gazebo with the effort controller in the first terminal and start the node in a second terminal.
+
+```bash
+ros2 launch iiwa_bringup iiwa.launch.py command_interface:="effort" robot_controller:="effort_controller"
+```
+
+```bash
+ros2 run ros2_kdl_package ros2_kdl_node --ros-args -p cmd_interface:=effort
+```
+
+For velocity or effort control, place a trajectory ID immediately after the executable name and before `--ros-args` to select a different trajectory. The published source selects operational-space inverse dynamics in effort mode. The joint-space recordings used the alternate compile-time setting, `choice=1`.
+
+To view the commanded joint torques, open the plotting tool and select `/effort_controller/commands/data[0]` through `/effort_controller/commands/data[6]`.
+
+```bash
+ros2 run rqt_plot rqt_plot
+```
+
+## Trajectories and recordings
+
+| ID | Trajectory | Terminal input | Joint-space video | Operational-space video |
+| --- | --- | --- | --- | --- |
+| `0` | Straight line, trapezoidal velocity | Acceleration time | [Video](VIDEO_JS/Traj_0.mp4) | [Video](VIDEO_OS/Traj_0.mp4) |
+| `1` | Straight line, cubic profile | None | [Video](VIDEO_JS/Traj_1.mp4) | [Video](VIDEO_OS/Traj_1.mp4) |
+| `2` | Circle, trapezoidal velocity | Acceleration time, then radius | [Video](VIDEO_JS/Traj_2.mp4) | [Video](VIDEO_OS/Traj_2.mp4) |
+| `3` | Circle, cubic profile | Radius | [Video](VIDEO_JS/Traj_3.mp4) | [Video](VIDEO_OS/Traj_3.mp4) |
+
+The original examples suggest an acceleration time of `0.5` s and a radius of `0.2` m when prompted.
+
+## Results and recorded data
+
+The report compares the seven commanded torques for each trajectory in both control spaces. Figures 3.1–3.4 cover joint space, and Figures 4.1–4.4 cover operational space.
+
+Each video has a corresponding rosbag2 recording under [`bag_js/`](bag_js/) or [`bag_os/`](bag_os/), with `my_bag_0` through `my_bag_3` matching the trajectory IDs. Open the recordings with rosbag2 or MATLAB ROS Toolbox and select `/effort_controller/commands`. The included [MATLAB plotting script](plot_bag.m) expects a local bag path. Its horizontal axis represents sample index.
+
+## Attribution
+
+Developed as a group project for Robotics Lab. The project extends the course KDL starter package and uses the bundled iiwa ROS 2 stack.
